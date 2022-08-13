@@ -10,6 +10,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.deleteUser = this.deleteUser.bind(this);
+    this.addUser = this.addUser.bind(this)
 
     this.state = {
       users: [
@@ -32,6 +33,14 @@ class App extends Component {
   }
 }
 
+  addUser(newUser) {
+    let updatedUsers = this.state.users;
+    updatedUsers.push(newUser);
+    this.setState({
+      users:updatedUsers
+    });
+  }
+
 
   deleteUser(id) {
     let  updatedUsers = this.state.users;
@@ -39,10 +48,6 @@ class App extends Component {
     //Stateler direct immutable
     this.setState({users:updatedUsers})
   }
-
-
-  
-
   
   render() {
   return (
@@ -51,7 +56,7 @@ class App extends Component {
       <hr></hr>
       {/* <h5>{title}</h5> */}
       {/* {isAuthorized ? <p>Authorized</p> : <p>Not Authorized</p>} */}
-      <AddUser/>
+      <AddUser addUser = {this.addUser} />
       <hr/>
       <Users deleteUser = {this.deleteUser} users = {this.state.users}/>
     </div>    
