@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{Component} from "react";
+import AddUser from "./components/AddUser";
+import Users from "./components/Users";
 
-function App() {
+
+class App extends Component {
+  // const title = "emre kose";
+  // const isAuthorized = false;
+
+  constructor(props){
+    super(props);
+    this.deleteUser = this.deleteUser.bind(this);
+
+    this.state = {
+      users: [
+        {
+        id: 1,
+        name : "emre kose",
+        email : "emre@hotmail.com" 
+        },
+        {
+        id: 2,
+        name : "ali kose",
+        email : "ali@hotmail.com" 
+        },
+        {
+          id: 3,
+          name : "veli",
+          email : "veli@hotmail.com" 
+          }
+      ]
+  }
+}
+
+
+  deleteUser(id) {
+    let  updatedUsers = this.state.users;
+    updatedUsers = updatedUsers.filter(user => user.id !== id);
+    //Stateler direct immutable
+    this.setState({users:updatedUsers})
+  }
+
+
+  
+
+  
+  render() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className="container">
+      <h5>User app</h5>
+      <hr></hr>
+      {/* <h5>{title}</h5> */}
+      {/* {isAuthorized ? <p>Authorized</p> : <p>Not Authorized</p>} */}
+      <AddUser/>
+      <hr/>
+      <Users deleteUser = {this.deleteUser} users = {this.state.users}/>
+    </div>    
   );
+}
 }
 
 export default App;
